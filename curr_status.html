@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online/Offline Detection</title>
+</head>
+<body>
+  <h1 id="status"></h1>
+  <input type="text" id="myInput">
+<p id="status1"></p>
+
+<script>
+  const inputElement = document.getElementById('myInput');
+  const statusElement = document.getElementById('status1');
+  let typingTimer;
+  const doneTypingInterval = 500; // Time in milliseconds
+
+  inputElement.addEventListener('input', () => {
+    clearTimeout(typingTimer);
+    statusElement.textContent = "Typing...";
+     setTimeout(doneTyping, doneTypingInterval);
+  });
+
+  function doneTyping() {
+    statusElement.textContent = "Stopped typing";
+  }
+</script>
+
+  <script>
+    function updateOnlineStatus() {
+      const statusElement = document.getElementById('status');
+      if (navigator.onLine) {
+        statusElement.textContent = "User is online";
+        statusElement.style.color = "green";
+      } else {
+        statusElement.textContent = "User is offline";
+        statusElement.style.color = "red";
+      }
+    }
+
+    window.addEventListener('online',  updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+    // Initial check
+    updateOnlineStatus();
+  </script>
+</body>
+</html>
